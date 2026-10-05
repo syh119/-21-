@@ -1,3 +1,6 @@
+# -21-
+第21届智能汽车大赛创意组智慧医疗比赛开源项目（30s左右），感谢一路上的同学帮助决定开源（虽然很菜但是应该可以帮助刚入门的同学）
+
 costmap_converter ROS Package
 =============================
 
@@ -25,6 +28,7 @@ Some third-party dependencies are included that are licensed under different ter
    (partially required for the *CostmapToDynamicObstacles* plugin)
 
 All packages included are distributed in the hope that they will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the licenses for more details.
+
 
 
 
