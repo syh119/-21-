@@ -1,0 +1,50 @@
+<root main_tree_to_execute="MainTree">
+  <BehaviorTree ID="MainTree">
+    <RecoveryNode number_of_retries="3" name="NavigateRecovery">
+
+      <!-- 主导航序列 -->
+      <PipelineSequence name="NavigateWithWaypoints">
+
+        <!-- 速率控制：限制重规划频率，减少抖动 -->
+        <RateController hz="1.0">
+          <RecoveryNode number_of_retries="2" name="ComputePath">
+            <ComputePathToPose goal="{current_goal}"
+                               path="{path}"
+                               planner_id="GridBased"/>
+            <!-- 规划失败：跳到下一个航点 -->
+            <Sequence>
+              <RemovePassedGoals input_goals="{goals}"
+                                 output_goals="{goals}"
+                                 radius="0.5"/>
+              <ComputePathToPose goal="{current_goal}"
+                                 path="{path}"
+                                 planner_id="GridBased"/>
+            </Sequence>
+          </RecoveryNode>
+        </RateController>
+
+        <!-- 路径跟踪 -->
+        <RecoveryNode number_of_retries="2" name="FollowPath">
+          <FollowPath path="{path}"
+                      controller_id="FollowPath"
+                      goal_checker_id="waypoint_goal_checker"/>
+          <!-- 跟踪失败恢复 -->
+          <Sequence>
+            <ClearEntireCostmap service_name="local_costmap/clear_entirely_local_costmap"/>
+            <FollowPath path="{path}"
+                        controller_id="FollowPath"
+                        goal_checker_id="waypoint_goal_checker"/>
+          </Sequence>
+        </RecoveryNode>
+
+      </PipelineSequence>
+
+      <!-- 全局恢复：清除代价地图 -->
+      <Sequence>
+        <ClearEntireCostmap service_name="local_costmap/clear_entirely_local_costmap"/>
+        <ClearEntireCostmap service_name="global_costmap/clear_entirely_global_costmap"/>
+      </Sequence>
+
+    </RecoveryNode>
+  </BehaviorTree>
+</root>

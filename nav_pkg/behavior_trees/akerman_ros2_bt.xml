@@ -1,0 +1,20 @@
+<root main_tree_to_execute="MainTree">
+  <BehaviorTree ID="MainTree">
+    <Sequence name="NavigateToPoseROS2">
+      <RateController hz="10.0">
+        <Sequence>
+          <ComputePathToPose 
+            goal="{goal}" 
+            path="{path}" 
+            planner_server="planner_server" 
+            plugin="GridBased" />
+          <FollowPath 
+            path="{path}" 
+            controller_server="controller_server" 
+            goal_checker="general_goal_checker" />
+          <GoalReached goal_checker="general_goal_checker" />
+        </Sequence>
+      </RateController>
+    </Sequence>
+  </BehaviorTree>
+</root>

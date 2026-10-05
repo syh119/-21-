@@ -1,0 +1,17 @@
+dual_imu_fusion_node:
+  ros__parameters:
+    primary_imu_topic: "/imu660ra/data_raw"
+    secondary_imu_topic: "/imu/data_raw"
+    odom_topic: "/odom_raw"
+    output_topic: "/imu/fused"
+    output_frame_id: "imu_link"
+
+    primary_weight: 0.8
+    secondary_weight: 0.2
+    max_secondary_age_sec: 0.10
+    max_time_skew_sec: 0.08
+
+    stationary_linear_vel_threshold: 0.03
+    stationary_angular_vel_threshold: 0.05
+    bias_learning_rate: 0.03
+    zero_rate_threshold_radps: 0.015

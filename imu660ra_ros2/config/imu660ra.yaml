@@ -1,0 +1,33 @@
+imu660ra_node:
+  ros__parameters:
+    transport: "i2c"
+    device: "/dev/i2c-0"
+    i2c_address: 105
+    spi_speed_hz: 10000000
+    topic_name: "/imu660ra/data_raw"
+    publish_rate_hz: 100.0
+    frame_id: "imu_link"
+    acc_range_g: 8
+    gyro_range_dps: 2000
+    acc_conf: 167
+    gyr_conf: 168
+    config_chunk_size: 64
+    calibrate_gyro_on_startup: true
+    gyro_calibration_duration_sec: 2.0
+    gyro_calibration_settle_sec: 0.5
+    gyro_calibration_stddev_threshold_radps: 0.05
+    gyro_offset_x: 0.0
+    gyro_offset_y: 0.0
+    gyro_offset_z: 0.0
+    acc_offset_x: 0.0
+    acc_offset_y: 0.0
+    acc_offset_z: 0.0
+    enable_online_bias_calibration: true
+    online_bias_time_constant_sec: 8.0
+    stationary_accel_norm_threshold_mps2: 0.2
+    stationary_gyro_threshold_radps: 0.08
+    gyro_zero_deadband_radps: 0.01
+    gyro_low_pass_cutoff_hz: 25.0
+    accel_low_pass_cutoff_hz: 20.0
+    angular_velocity_covariance_diag: 0.0025
+    linear_acceleration_covariance_diag: 0.04

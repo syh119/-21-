@@ -1,0 +1,5 @@
+# Request
+string identifier  # UUID or numeric shape ID
+---
+bool success
+string message     # optional, for feedback
